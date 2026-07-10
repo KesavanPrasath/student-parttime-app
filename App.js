@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { registerRootComponent } from 'expo';
 
 // Import our external clean screens
 import LoginScreen from './screens/LoginScreen';
@@ -9,14 +10,29 @@ import JobFeedScreen from './screens/JobFeedScreen';
 
 const Stack = createStackNavigator();
 
-export default function App() {
+function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Timetable" component={TimetableScreen} options={{ title: 'Your Schedule' }} />
-        <Stack.Screen name="JobFeed" component={JobFeedScreen} options={{ title: 'Available Shifts' }} />
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Timetable" 
+          component={TimetableScreen} 
+          options={{ title: 'Your Schedule' }} 
+        />
+        <Stack.Screen 
+          name="JobFeed" 
+          component={JobFeedScreen} 
+          options={{ title: 'Available Shifts' }} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+// This line registers the App component as the main entry point for the Expo project
+registerRootComponent(App);
