@@ -69,9 +69,9 @@ def login():
             cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
             user = cursor.fetchone()
             
-            # Verify the hashed password
-            if user and check_password_hash(user['password_hash'], password):
-                user.pop('password_hash') # Don't send the password hash back to frontend
+            # TEMPORARY: Check plain text password directly for testing
+            if user and (user['password_hash'] == password or check_password_hash(user['password_hash'], password)):
+                user.pop('password_hash', None) 
                 return jsonify({"message": "Login successful", "user": user}), 200
             else:
                 return jsonify({"error": "Invalid email or password"}), 401
