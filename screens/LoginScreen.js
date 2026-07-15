@@ -5,16 +5,34 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
-    // Simple mock login check
-    if (email === 'student@test.com' && password === 'password123') {
-      navigation.navigate('Timetable');
-    } else {
-      Alert.alert('Error', 'Invalid email or password');
+
+    try {
+      const response = await fetch('http://10.0.1.169:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 200 && data.message === "Login successful") {
+        navigation.navigate('Timetable');
+      } else {
+        Alert.alert('Error', data.error || 'Invalid email or password');
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert(
+        'Connection Error', 
+        'Could not reach the backend server. Verify that your Flask backend is active and running.'
+      );
     }
   };
 
