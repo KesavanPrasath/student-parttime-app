@@ -10,7 +10,7 @@ CORS(app)
 db_config = {
     'host': '34.136.166.121',
     'user': 'admin',
-    'password': '0112713435@KkpKp',
+    'password': 'password',
     'database': 'shiftsync',
     'cursorclass': pymysql.cursors.DictCursor
 }
