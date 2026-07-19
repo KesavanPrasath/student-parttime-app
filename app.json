@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "ecc0e200-87ea-434f-bad6-c6657ddafc4b"
+      }
+    },
+    "android": {
+      "package": "com.kesavanprasath.studentparttimeapp"
+    }
+  }
+}
